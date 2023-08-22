@@ -31,7 +31,10 @@ complete -o default -F __start_kubectl k
 # source ${HOME}/bin/aws_zsh_complete.sh
 eval "$(zoxide init zsh)"
 
-# Used in man(1) colorization. 
+# Use most(1) as the pager (e.g. man(1))
+export PAGER=most
+
+# Colorize less(1)
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'

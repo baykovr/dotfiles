@@ -5,6 +5,7 @@
     programs.home-manager.enable = true;
     home.packages = [
         pkgs.nixpkgs-fmt
+        pkgs.most
     ];
 
 }
