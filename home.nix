@@ -6,6 +6,7 @@
     home.packages = [
         pkgs.nixpkgs-fmt
         pkgs.most
+        pkgs.neovim
     ];
 
 }

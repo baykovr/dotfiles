@@ -24,10 +24,10 @@ alias rs=redshift
 alias gcl=gitlab-ci-local
 alias l="exa -l"
 alias lt="exa -l -T -L"
+alias vim=nvim
 
 complete -o default -F __start_kubectl k
 
-# alias vim=nvim
 # source ${HOME}/bin/aws_zsh_complete.sh
 eval "$(zoxide init zsh)"
 
