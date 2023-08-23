@@ -25,6 +25,7 @@ alias gcl=gitlab-ci-local
 alias l="exa -l"
 alias lt="exa -l -T -L"
 alias vim=nvim
+alias bat="bat -p"
 
 complete -o default -F __start_kubectl k
 

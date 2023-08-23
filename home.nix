@@ -7,6 +7,7 @@
         pkgs.nixpkgs-fmt
         pkgs.most
         pkgs.neovim
+        pkgs.fuse
     ];
 
 }
