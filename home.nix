@@ -27,12 +27,19 @@
 
         colorscheme gruvbox-material
         set background=light
+
+        """ Key Map
+        map <F3> :NvimTreeToggle<CR>
 	    '';
 
 	    plugins = with pkgs.vimPlugins; [
-        nvim-treesitter.withAllGrammars
         gruvbox-material
         nvim-tree-lua
-	    ];
+        {
+          plugin = nvim-tree-lua;
+          type   = "lua";
+          config = builtins.readFile(./neovim/nvim-tree-lua.lua);
+        }
+      ];
     };
 }
