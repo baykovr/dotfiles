@@ -3,7 +3,15 @@
     home.homeDirectory = "/home/baykovr";
     home.stateVersion = "23.05"; 
     programs.home-manager.enable = true;
-    
+
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        shell.program = "${pkgs.zsh}/bin/zsh";
+        font.size = 14;
+      };
+    };
+
     home.packages = [
         pkgs.nixpkgs-fmt
         pkgs.most
