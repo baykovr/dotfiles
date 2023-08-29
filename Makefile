@@ -1,5 +1,13 @@
 #!/usr/bin/env make
 
+.PHONY: build
+build:
+	@nix run . -- build --flake .
+
 .PHONY: switch
 switch:
-	home-manager switch --flake .
+	@nix run . -- switch --flake .
+
+.PHONY: hm-sw
+hw-sw:
+	@home-manager switch --flake .
