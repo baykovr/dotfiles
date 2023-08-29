@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
     home.username = "baykovr";
     home.homeDirectory = "/home/baykovr";
     home.stateVersion = "23.05"; 
@@ -36,28 +36,12 @@
 
     programs.neovim = {
       enable = true;
-	    defaultEditor = true;
-	    extraConfig = ''
-	      set nocompatible
-	      set termguicolors
-	      syntax on
-	      filetype plugin indent on
+      defaultEditor = true;
 
-	      set number
-	      set ttyfast
-	      set cursorline
+      extraConfig = lib.fileContents neovim/init.vim;
 
-	      set autoindent expandtab tabstop=2 shiftwidth=2
-
-        colorscheme gruvbox-material
-        set background=light
-
-        """ Key Map
-        map <F3> :NvimTreeToggle<CR>
-
-	    '';
-
-	    plugins = with pkgs.vimPlugins; [
+      plugins = with pkgs.vimPlugins; [
+        vim-nix
         gruvbox-material
         nvim-treesitter
         {
