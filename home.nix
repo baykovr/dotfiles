@@ -16,6 +16,22 @@
         pkgs.nixpkgs-fmt
         pkgs.most
         pkgs.fuse
+        pkgs.bat
+        pkgs.broot
+        pkgs.cargo
+        pkgs.gnumake
+        pkgs.grim
+        pkgs.k9s
+        pkgs.kubectl
+        pkgs.nix-index
+        pkgs.ripgrep
+        pkgs.rustc
+        pkgs.slurp
+        pkgs.ssm-session-manager-plugin
+        pkgs.terraform
+        pkgs.tldr
+        pkgs.virtualenv
+        pkgs.wlsunset
     ];
 
     programs.neovim = {
@@ -38,11 +54,17 @@
 
         """ Key Map
         map <F3> :NvimTreeToggle<CR>
+
 	    '';
 
 	    plugins = with pkgs.vimPlugins; [
         gruvbox-material
-        nvim-tree-lua
+        nvim-treesitter
+        {
+          plugin = nvim-colorizer-lua;
+          type   = "lua";
+          config = builtins.readFile(./neovim/nvim-colorizer-lua.lua);
+        }
         {
           plugin = nvim-tree-lua;
           type   = "lua";

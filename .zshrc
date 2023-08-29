@@ -33,4 +33,4 @@ complete -o default -F __start_kubectl k
 eval "$(zoxide init zsh)"
 
 # Use most(1) as the pager (e.g. man(1))
-export PAGER=more
+export PAGER=less
