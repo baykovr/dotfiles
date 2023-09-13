@@ -27,6 +27,9 @@ alias lt="exa -l -T -L"
 alias vim=nvim
 alias bat="bat -p"
 
+alias nix-search="nix search nixpkgs"
+alias nix-eval="nix-instantiate --eval --strict"
+
 complete -o default -F __start_kubectl k
 
 # source ${HOME}/bin/aws_zsh_complete.sh

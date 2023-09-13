@@ -9,9 +9,9 @@ require("nvim-tree").setup({
   renderer = {
     icons = {
       show = {
-        file = false,
-        folder = false,
-        folder_arrow = false,
+        file = true,
+        folder = true,
+        folder_arrow = true,
       }
     }
   }

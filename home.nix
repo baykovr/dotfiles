@@ -4,11 +4,14 @@
     home.stateVersion = "23.05"; 
     programs.home-manager.enable = true;
 
+    fonts.fontconfig.enable = true;
+
     programs.alacritty = {
       enable = true;
       settings = {
         shell.program = "${pkgs.zsh}/bin/zsh";
-        font.size = 14;
+        font.size = 16;
+        import =  ["~/.config/alacritty/themes/themes/solarized_light.yaml"];
       };
     };
 
@@ -32,6 +35,9 @@
         pkgs.tldr
         pkgs.virtualenv
         pkgs.wlsunset
+        pkgs.nerdfonts
+        pkgs.nix-output-monitor
+        pkgs.ack
     ];
 
     programs.neovim = {
@@ -39,21 +45,45 @@
       defaultEditor = true;
 
       extraConfig = lib.fileContents neovim/init.vim;
-
+      
       plugins = with pkgs.vimPlugins; [
         vim-nix
         gruvbox-material
-        nvim-treesitter
+        vim-terraform
+        nvim-web-devicons
+        {
+          plugin = barbar-nvim;
+          type   = "lua";
+          config = builtins.readFile(./neovim/barbar.lua);
+        }
+        vim-commentary
+        {
+          plugin = pretty-fold-nvim;
+          config = ''
+            lua require('pretty-fold').setup()
+          '';
+        }
+
+        nvim-treesitter.withAllGrammars
         {
           plugin = nvim-colorizer-lua;
-          type   = "lua";
-          config = builtins.readFile(./neovim/nvim-colorizer-lua.lua);
+          config = ''
+            packadd! nvim-colorizer.lua
+            lua require 'colorizer'.setup()
+          '';
         }
         {
           plugin = nvim-tree-lua;
           type   = "lua";
           config = builtins.readFile(./neovim/nvim-tree-lua.lua);
         }
+        {
+          plugin = toggleterm-nvim;
+          type   = "lua";
+          config = builtins.readFile(./neovim/toggleterm-nvim.lua);
+        }
+        coq_nvim
+        coq-artifacts
       ];
     };
 }
