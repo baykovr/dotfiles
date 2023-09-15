@@ -18,3 +18,4 @@ set background=light
 """ Key Map
 map <F3> :NvimTreeToggle<CR>
 map <F12> :COQnow<CR>
+map <F7> :Telescope live_grep<CR>

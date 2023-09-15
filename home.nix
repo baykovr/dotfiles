@@ -9,8 +9,8 @@
     programs.alacritty = {
       enable = true;
       settings = {
-        shell.program = "${pkgs.zsh}/bin/zsh";
         font.size = 16;
+        shell.program = "${pkgs.zsh}/bin/zsh";
         import =  ["~/.config/alacritty/themes/themes/solarized_light.yaml"];
       };
     };
@@ -19,7 +19,6 @@
         pkgs.nixpkgs-fmt
         pkgs.most
         pkgs.fuse
-        pkgs.bat
         pkgs.broot
         pkgs.cargo
         pkgs.gnumake
@@ -38,7 +37,31 @@
         pkgs.nerdfonts
         pkgs.nix-output-monitor
         pkgs.ack
-    ];
+      ];
+
+    programs.lazygit = {
+        enable = true;
+        settings = {
+          gui.theme = {
+            lightTheme = true;
+          };
+        };
+      };
+
+    programs.bat = {
+      enable = true;
+      config = {
+        theme = "gruvbox-light";
+      };
+    };
+
+    programs.lf = {
+      enable = true;
+      settings = {
+        icons = true;
+        number = true;
+      };
+    };
 
     programs.neovim = {
       enable = true;
@@ -50,20 +73,28 @@
         vim-nix
         gruvbox-material
         vim-terraform
+        vim-commentary
         nvim-web-devicons
+        coq_nvim
+        coq-artifacts
+        { 
+          plugin = telescope-nvim;
+          type   = "lua";
+          config = ''
+            require('telescope').setup()
+          '';
+        }
         {
           plugin = barbar-nvim;
           type   = "lua";
           config = builtins.readFile(./neovim/barbar.lua);
         }
-        vim-commentary
         {
           plugin = pretty-fold-nvim;
           config = ''
             lua require('pretty-fold').setup()
           '';
         }
-
         nvim-treesitter.withAllGrammars
         {
           plugin = nvim-colorizer-lua;
@@ -82,8 +113,6 @@
           type   = "lua";
           config = builtins.readFile(./neovim/toggleterm-nvim.lua);
         }
-        coq_nvim
-        coq-artifacts
       ];
     };
 }
