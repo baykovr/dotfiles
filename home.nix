@@ -37,6 +37,10 @@
         pkgs.nerdfonts
         pkgs.nix-output-monitor
         pkgs.ack
+        pkgs.nodejs
+        pkgs.terraform-lsp
+        pkgs.nixd
+        pkgs.nixdoc
       ];
 
     programs.lazygit = {
@@ -75,8 +79,6 @@
         vim-terraform
         vim-commentary
         nvim-web-devicons
-        coq_nvim
-        coq-artifacts
         { 
           plugin = telescope-nvim;
           type   = "lua";
@@ -113,6 +115,24 @@
           type   = "lua";
           config = builtins.readFile(./neovim/toggleterm-nvim.lua);
         }
+        coc-nvim
+        coc-clangd
       ];
+    };
+    xdg.configFile = {
+      "nvim/coc-settings.json".text = builtins.toJSON {
+        "languageserver" = {
+          "nixd" = {
+            "command" = "nixd";
+            "rootPatterns" = [ ".nixd.json" ];
+            "filetypes" = [ "nix" ];
+          };
+          "terraform" = {
+            "command" = "terraform-ls";
+            "args" = [ "server" ];
+            "filestypes" = [ "terraform" "tf" ];
+          };
+        };
+      };
     };
 }
