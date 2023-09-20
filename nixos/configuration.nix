@@ -14,6 +14,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "errata";
+  services.resolved.enable = true;
 
   networking.networkmanager.enable = true;  
   time.timeZone = "America/Los_Angeles";
@@ -37,6 +38,7 @@ in
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "slack" "discord"
   ];
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; # slack screensharing
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -62,7 +64,7 @@ in
     qemu
     compsize
     efibootmgr
-    alacritty
+    xterm
     exa
     duf
     zoxide 
@@ -80,13 +82,29 @@ in
     pkgs.slack
     
     python3
+    go
   ];
 
+  programs.thunar = {
+    enable = true;
+  };
 
+  # Compositor.
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
   };
+
+  # Allow screen sharing.
+  services.dbus = {
+    enable = true;
+  };
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+  };
+
+  xdg.portal.wlr.enable = true; 
 
   fileSystems = {
     "/".options = [ "compress=zstd" ];
@@ -96,4 +114,3 @@ in
 
   system.stateVersion = "${stateVersion}";
  }
-
