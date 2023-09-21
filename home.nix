@@ -38,7 +38,7 @@
         pkgs.nix-output-monitor
         pkgs.ack
         pkgs.nodejs
-        pkgs.terraform-lsp
+        pkgs.terraform-ls
         pkgs.nixd
         pkgs.nixdoc
       ];
@@ -114,6 +114,17 @@
           plugin = toggleterm-nvim;
           type   = "lua";
           config = builtins.readFile(./neovim/toggleterm-nvim.lua);
+        }
+        {
+          plugin = indent-blankline-nvim;
+          type   = "lua";
+          config = ''
+            require("indent_blankline").setup {
+            -- for example, context is off by default, use this to turn it on
+            show_current_context = true,
+            show_current_context_start = true,
+            }
+            '';
         }
         coc-nvim
         coc-clangd
