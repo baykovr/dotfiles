@@ -6,7 +6,22 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 require("nvim-tree").setup({
+  view = {
+    number = true,
+  },
   renderer = {
+    indent_width = 1,
+    indent_markers = {
+      enable = true,
+      inline_arrows = true,
+       icons = {
+        corner = "└",
+        edge = "│",
+        item = "│",
+        bottom = "─",
+        none = " ",
+      },
+    },
     icons = {
       show = {
         file = true,

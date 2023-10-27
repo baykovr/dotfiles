@@ -26,8 +26,7 @@ alias l="exa -l"
 alias lt="exa -l -T -L"
 alias vim=nvim
 alias bat="bat -p"
-
-alias nix-search="nix search nixpkgs"
+alias dismako="makoctl dismiss -a"
 alias nix-eval="nix-instantiate --eval --strict"
 
 complete -o default -F __start_kubectl k

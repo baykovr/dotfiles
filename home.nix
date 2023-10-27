@@ -5,44 +5,16 @@
     programs.home-manager.enable = true;
 
     fonts.fontconfig.enable = true;
+    home.packages = import ./packages.nix { pkgs = pkgs; };
 
     programs.alacritty = {
       enable = true;
       settings = {
-        font.size = 16;
+        font.size = 18;
         shell.program = "${pkgs.zsh}/bin/zsh";
         import =  ["~/.config/alacritty/themes/themes/solarized_light.yaml"];
       };
     };
-
-    home.packages = [
-        pkgs.nixpkgs-fmt
-        pkgs.most
-        pkgs.fuse
-        pkgs.broot
-        pkgs.cargo
-        pkgs.gnumake
-        pkgs.grim
-        pkgs.k9s
-        pkgs.kubectl
-        pkgs.nix-index
-        pkgs.ripgrep
-        pkgs.rustc
-        pkgs.slurp
-        pkgs.ssm-session-manager-plugin
-        pkgs.terraform
-        pkgs.tldr
-        pkgs.virtualenv
-        pkgs.wlsunset
-        pkgs.nerdfonts
-        pkgs.nix-output-monitor
-        pkgs.ack
-        pkgs.nodejs
-        pkgs.terraform-ls
-        pkgs.nixd
-        pkgs.nixdoc
-      ];
-
     programs.lazygit = {
         enable = true;
         settings = {
@@ -51,20 +23,22 @@
           };
         };
       };
-
     programs.bat = {
       enable = true;
       config = {
         theme = "gruvbox-light";
       };
     };
-
     programs.lf = {
       enable = true;
       settings = {
         icons = true;
         number = true;
       };
+    };
+    programs.vscode = {
+      enable = true;
+      package = pkgs.vscode.fhs;
     };
 
     programs.neovim = {
@@ -119,15 +93,40 @@
           plugin = indent-blankline-nvim;
           type   = "lua";
           config = ''
-            require("indent_blankline").setup {
-            -- for example, context is off by default, use this to turn it on
-            show_current_context = true,
-            show_current_context_start = true,
-            }
+            require("ibl").setup {}
             '';
+        }
+        {
+          plugin = galaxyline-nvim;
+          type = "lua";
+          config = ''
+            local gl = require('galaxyline')
+            local condition = require('galaxyline.condition')
+            local gls = gl.section
+            require('galaxyline').section.left[1] = {
+              FileSize = {
+                provider = 'FileSize',
+                condition = condition.buffer_not_empty,
+                icon = '   ',
+                separator = '',
+                highlight = { "#f8DDA8", "#2e2e2e"},
+                separator_highlight = { "#ebb450", "#2e2e2e"}
+              },
+              LineInfo = {
+                provider = 'LineColumn',
+                separator = ' ',
+                highlight = { "#f8DDA8", "#2e2e2e"},
+                separator_highlight = { "#ebb450", "#2e2e2e"}
+              },
+            }
+           '';
         }
         coc-nvim
         coc-clangd
+        coc-pyright
+        coc-sh
+        coc-go
+        coc-yaml
       ];
     };
     xdg.configFile = {
