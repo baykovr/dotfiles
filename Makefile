@@ -8,6 +8,6 @@ build:
 switch:
 	@nix run . -- switch --flake .
 
-.PHONY: hm-sw
-hw-sw:
-	@home-manager switch --flake .
+.PHONY: hmsw
+hwsw:
+	@home-manager switch --flake ~/.config/home-manager && source ~/.zshrc

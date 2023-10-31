@@ -2,9 +2,19 @@
 let
   pypkgs = ps: with ps; [
     boto3
+    toml
+    rich
+    requests
+    pytest
+    pynamodb
+    beautifulsoup4
+    fuse
+    daemonize
   ];
 in with pkgs;
 [
+  binutils
+  # 2023
   ack
   broot
   cargo
@@ -32,9 +42,27 @@ in with pkgs;
   tldr
   tree
   virtualenv
-  wlsunset
-  wayshot
   zip
   aws-sam-cli
+  # 2024 
+  eza
+  victor-mono
+  rofi
+  docker-compose
+  poetry
+  xclip
+  slock
+  unzip
+  nix-derivation
+  comma
+  feh
+  redshift
+  scrot
+  bcc
+  act
+  gh
+  trivy
+  gcc-unwrapped
+  fuse3
  (python3.withPackages pypkgs)
 ]
