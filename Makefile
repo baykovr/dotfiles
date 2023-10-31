@@ -10,4 +10,5 @@ switch:
 
 .PHONY: hm-sw
 hw-sw:
-	@home-manager switch --flake .
+	#@home-manager switch --flake .
+	@home-manager switch --flake ~/.config/home-manager && source ~/.zshrc

@@ -8,6 +8,7 @@ in
   imports =
     [
       ./hardware-configuration.nix
+      ./hosts.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -15,6 +16,8 @@ in
 
   networking.hostName = "errata";
   services.resolved.enable = true;
+  services.sshd.enable = true;
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   networking.networkmanager.enable = true;  
   time.timeZone = "America/Los_Angeles";
@@ -38,6 +41,7 @@ in
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "slack" "discord"
   ];
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # slack screensharing
 
   programs.zsh.enable = true;
@@ -70,7 +74,6 @@ in
     zoxide 
     btop
 
-    wayshot
     sway
     mako 
     bemenu
@@ -83,6 +86,7 @@ in
     
     python3
     go
+    dig
   ];
 
   programs.thunar = {
