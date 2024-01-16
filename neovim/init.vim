@@ -13,7 +13,7 @@ highlight CursorLine term=bold ctermbg=150
 set autoindent expandtab tabstop=2 shiftwidth=2
 
 colorscheme gruvbox-material
-set background=light
+set background=dark
 
 """ Key Map
 map <F3> :NvimTreeToggle<CR>

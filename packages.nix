@@ -32,9 +32,12 @@ in with pkgs;
   tldr
   tree
   virtualenv
-  wlsunset
-  wayshot
   zip
   aws-sam-cli
+  # 
+  eza
+  victor-mono
+  rofi
+  docker-compose
  (python3.withPackages pypkgs)
 ]
