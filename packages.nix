@@ -5,6 +5,7 @@ let
   ];
 in with pkgs;
 [
+  # 2023
   ack
   broot
   cargo
@@ -34,10 +35,11 @@ in with pkgs;
   virtualenv
   zip
   aws-sam-cli
-  # 
+  # 01-2024 
   eza
   victor-mono
   rofi
   docker-compose
+  poetry
  (python3.withPackages pypkgs)
 ]
