@@ -29,7 +29,9 @@
           lua require('pretty-fold').setup()
         '';
       }
-      nvim-treesitter.withAllGrammars
+
+      (nvim-treesitter.withPlugins (p: [p.nix p.python p.terraform p.go p.rust p.yaml ]))
+
       {
         plugin = nvim-colorizer-lua;
         config = ''

@@ -41,5 +41,11 @@ in with pkgs;
   rofi
   docker-compose
   poetry
+  xclip
+  slock
+  unzip
+  nix-derivation
+  comma
+  feh
  (python3.withPackages pypkgs)
 ]
