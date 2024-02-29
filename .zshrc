@@ -36,3 +36,8 @@ eval "$(zoxide init zsh)"
 
 # Use most(1) as the pager (e.g. man(1))
 export PAGER=less
+
+
+#awsrc 
+alias ecr-ls="aws ecr describe-repositories | jq -r '.repositories.[].repositoryName'"
+

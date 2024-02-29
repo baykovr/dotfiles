@@ -2,6 +2,11 @@
 let
   pypkgs = ps: with ps; [
     boto3
+    toml
+    rich
+    requests
+    pytest
+    asyncio
   ];
 in with pkgs;
 [
@@ -47,5 +52,7 @@ in with pkgs;
   nix-derivation
   comma
   feh
+  redshift
+  scrot
  (python3.withPackages pypkgs)
 ]
