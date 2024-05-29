@@ -44,6 +44,8 @@ in with pkgs;
   virtualenv
   zip
   aws-sam-cli
+  awscli2
+  ssm-session-manager-plugin
   # 2024 
   eza
   victor-mono
@@ -64,5 +66,6 @@ in with pkgs;
   trivy
   gcc-unwrapped
   fuse3
+  tmux
  (python3.withPackages pypkgs)
 ]

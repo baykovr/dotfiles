@@ -29,6 +29,10 @@ alias bat="bat -p"
 alias dismako="makoctl dismiss -a"
 alias nix-eval="nix-instantiate --eval --strict"
 
+# Other Aliases
+alias tf="terraform"
+alias tfa="terraform apply -auto-approve"
+
 complete -o default -F __start_kubectl k
 
 # source ${HOME}/bin/aws_zsh_complete.sh

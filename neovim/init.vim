@@ -19,6 +19,7 @@ set background=light
 map <F3> :NvimTreeToggle<CR>
 map <F12> :COQnow<CR>
 map <F7> :Telescope live_grep<CR>
+nnoremap <A-t> :Telescope<CR>
 
 """ coc.nvim suggestions
 " Some servers have issues with backup files, see #649
