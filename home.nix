@@ -15,6 +15,7 @@
         #import =  ["~/.config/alacritty/themes/themes/solarized_light.yaml"];
       };
     };
+
     programs.lazygit = {
         enable = true;
         settings = {
@@ -23,12 +24,14 @@
           };
         };
       };
+
     programs.bat = {
       enable = true;
       config = {
         theme = "gruvbox-light";
       };
     };
+
     programs.lf = {
       enable = true;
       settings = {
@@ -36,6 +39,7 @@
         number = true;
       };
     };
+
     programs.vscode = {
       enable = true;
       package = pkgs.vscode.fhs;

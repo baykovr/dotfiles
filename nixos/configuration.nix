@@ -3,6 +3,7 @@ let
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   stateVersion = "23.05"; # Did you double check?
+  nameservers = [ "1.1.1.1" "8.8.8.8"];
 in
  {
   imports =
@@ -17,20 +18,58 @@ in
   networking.hostName = "errata";
   services.resolved.enable = true;
   services.sshd.enable = true;
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  services.openssh.settings.X11Forwarding = true;
+  environment.pathsToLink = [ "/libexec" ];
+  services.xserver = {
+	enable = true;
+	desktopManager = {
+		xterm.enable = false;
+	};
+	displayManager = {
+	  defaultSession = "none+i3";
+	  startx = {
+	    enable = true;
+          };	
+	};
+	windowManager.i3 = {
+	  enable = true;
+	  extraPackages = with pkgs; [
+	    dmenu
+	  ];  
+        };
+  };
 
-  networking.networkmanager.enable = true;  
+  networking.nameservers = nameservers;
+  networking.networkmanager.enable = true;
+
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  virtualisation.docker.enable = true;
+  documentation.man = {
+    enable = true;
+    generateCaches = true;
+  };
+
+  virtualisation.docker = {
+	enable = true;
+  };
+
+  virtualisation.docker.daemon.settings = {
+    dns = nameservers;
+  };
+
   virtualisation.docker.rootless = {
     enable = true;
     setSocketVariable = true;
   };
+
+  virtualisation.docker.rootless.daemon.settings = {
+    dns = nameservers;
+  };
+
 
   nix = {
     extraOptions = ''
@@ -39,10 +78,30 @@ in
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "slack" "discord"
+    "slack" "discord" "nvidia-x11" "nvidia-settings" "nvidia-persistenced"
   ];
 
+  nixpkgs.config.nvidia.acceptLicense = true;
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # slack screensharing
+  
+  # GPU
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
+  };
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -53,7 +112,6 @@ in
     packages = with pkgs; [
       firefox
       tree
-      awscli2
       jq
       tldr
     ];
@@ -61,6 +119,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    lxappearance
     vim 
     file
     wget
@@ -69,24 +128,26 @@ in
     compsize
     efibootmgr
     xterm
-    exa
     duf
     zoxide 
     btop
 
+    # Wayland Only
     sway
     mako 
     bemenu
     wl-clipboard 
     wdisplays
-
-    # nonfree
-    pkgs.discord
-    pkgs.slack
+    
+    gpu-screen-recorder
     
     python3
     go
     dig
+
+    # nonfree
+    pkgs.discord
+    pkgs.slack
   ];
 
   programs.thunar = {
@@ -108,7 +169,16 @@ in
     enable = true;
   };
 
-  xdg.portal.wlr.enable = true; 
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
+
 
   fileSystems = {
     "/".options = [ "compress=zstd" ];

@@ -6,16 +6,30 @@
     extraConfig = lib.fileContents ./init.vim;
     
     plugins = with pkgs.vimPlugins; [
-      vim-nix
       gruvbox-material
+      everforest
+      rose-pine
+
+      vim-nix
       vim-terraform
       vim-commentary
+
       nvim-web-devicons
+      {
+        plugin = plenary-nvim;
+        type   = "lua";
+      }
       { 
         plugin = telescope-nvim;
         type   = "lua";
         config = ''
-          require('telescope').setup()
+          require('telescope').setup{
+            pickers = {
+              colorscheme = {
+                enable_review = true 
+              }
+            }
+          }
         '';
       }
       {
@@ -29,9 +43,6 @@
           lua require('pretty-fold').setup()
         '';
       }
-
-      (nvim-treesitter.withPlugins (p: [p.nix p.python p.terraform p.go p.rust p.yaml ]))
-
       {
         plugin = nvim-colorizer-lua;
         config = ''
