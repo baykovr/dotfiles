@@ -1,34 +1,23 @@
 { pkgs }:
 let
   pypkgs = ps: with ps; [
-    beautifulsoup4
     boto3
-    daemonize
-    fuse
-    pynamodb
-    pytest
-    requests
-    rich
     toml
+    rich
+    requests
+    pytest
+    pynamodb
+    beautifulsoup4
+    fuse
+    daemonize
   ];
 in with pkgs;
 [
-  ack
-  act
-  aws-sam-cli
-  awscli2
-  bcc
   binutils
+  ack
   broot
   cargo
-  comma
-  docker-compose
-  eza
-  feh
   fuse
-  fuse3
-  gcc-unwrapped
-  gh
   gnumake
   grim
   jq
@@ -36,7 +25,6 @@ in with pkgs;
   kubectl
   most
   nerdfonts
-  nix-derivation
   nix-index
   nix-output-monitor
   nix-tree
@@ -44,25 +32,39 @@ in with pkgs;
   nixdoc
   nixpkgs-fmt
   nodejs
-  poetry
-  redshift
   ripgrep
-  rofi
   rustc
-  scrot
-  slock
   slurp
   ssm-session-manager-plugin
   terraform
   terraform-ls
   tldr
-  tmux
   tree
-  trivy
-  unzip
-  victor-mono
   virtualenv
-  xclip
   zip
+  aws-sam-cli
+  awscli2
+  ssm-session-manager-plugin
+  # 2024 
+  eza
+  victor-mono
+  rofi
+  docker-compose
+  poetry
+  xclip
+  slock
+  unzip
+  nix-derivation
+  comma
+  feh
+  redshift
+  scrot
+  bcc
+  act
+  gh
+  trivy
+  gcc-unwrapped
+  fuse3
+  tmux
  (python3.withPackages pypkgs)
 ]
