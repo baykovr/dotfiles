@@ -14,7 +14,7 @@
     outputs = {nixpkgs, home-manager, nix-search-cli, ...}: {
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         homeConfigurations = {
-          "baykovr" = home-manager.lib.homeManagerConfiguration {
+          "ethos" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs { 
               system = "x86_64-linux"; 
               config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [

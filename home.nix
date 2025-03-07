@@ -1,6 +1,6 @@
 {pkgs, lib, ...}: {
-    home.username = "baykovr";
-    home.homeDirectory = "/home/baykovr";
+    home.username = "ethos";
+    home.homeDirectory = "/home/ethos";
     home.stateVersion = "23.05"; 
     programs.home-manager.enable = true;
 
