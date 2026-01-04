@@ -1,8 +1,10 @@
 {pkgs, lib, ...}: {
     home.username = "ethos";
     home.homeDirectory = "/home/ethos";
-    home.stateVersion = "23.05"; 
+    home.stateVersion = "23.11";
     programs.home-manager.enable = true;
+
+    nixpkgs.config.allowUnfree = true;
 
     fonts.fontconfig.enable = true;
     home.packages = import ./packages.nix { pkgs = pkgs; };

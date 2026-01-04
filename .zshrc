@@ -20,22 +20,21 @@ bindkey "^T" fzf-file-widget
 source <(kubectl completion zsh)
 alias k=kubectl
 
-alias l="exa -l"
-alias lt="exa -l -T -L"
+alias l="ls -1"
 
 alias nix-eval="nix-instantiate --eval --strict"
 
 alias vim=nvim
 alias tf="terraform"
 alias tfa="terraform apply -auto-approve"
-
+alias k="kubectl"
 alias ec2-ls="aws ec2 describe-instances --query 'Reservations[*].Instances[*].InstanceId' --output text |cat"
 alias ec2-ssm="aws ssm start-session --target"
 alias ecr-ls="aws ecr describe-repositories | jq -r '.repositories.[].repositoryName'"
 
+alias wdl="cat -n ${HOME}/.wdrc"
+
 complete -o default -F __start_kubectl k
 
 source ${HOME}/bin/aws_zsh_completer.sh
-eval "$(zoxide init zsh)"
-
 export PAGER=less

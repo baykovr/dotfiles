@@ -24,7 +24,9 @@ in with pkgs;
   k9s
   kubectl
   most
-  nerdfonts
+  nerd-fonts.fira-code
+  nerd-fonts.jetbrains-mono
+  nerd-fonts.hack
   nix-index
   nix-output-monitor
   nix-tree
@@ -46,7 +48,6 @@ in with pkgs;
   awscli2
   ssm-session-manager-plugin
   # 2024 
-  eza
   victor-mono
   rofi
   docker-compose
@@ -66,5 +67,7 @@ in with pkgs;
   gcc-unwrapped
   fuse3
   tmux
+  claude-code
+  uv
  (python3.withPackages pypkgs)
 ]
