@@ -1,12 +1,10 @@
 #!/usr/bin/env make
 
-# Variables for consistency
 FLAKE_DIR := .
 HM_SWITCH := home-manager switch --flake $(FLAKE_DIR)
 
 .PHONY: help
 help:
-	@echo "Available targets:"
 	@echo "  switch     - Build and activate new home-manager configuration"
 	@echo "  build      - Build configuration without activating"
 	@echo "  update     - Update flake inputs"
