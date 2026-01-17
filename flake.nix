@@ -3,6 +3,7 @@
 
     inputs = rec {
         nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+        flake-utils.url = "github:numtide/flake-utils";
         home-manager = {
             url = "github:nix-community/home-manager";
         };
@@ -11,27 +12,32 @@
           #inputs.follows = nixpkgs;
         };
     };
-    outputs = {nixpkgs, home-manager, nix-search-cli, ...}: {
-        defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
-        homeConfigurations = {
-          "baykovr" = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs { 
-              system = "x86_64-linux"; 
-              config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-                "terraform"
-                "vscode"
-                "code"
+    outputs = {self, nixpkgs, home-manager, nix-search-cli, flake-utils, ...}:
+        let
+          system = "aarch64-darwin";
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          packages.${system}.default = self.homeConfigurations.baykovr.activationPackage;
+
+          homeConfigurations = {
+            "baykovr" = home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs {
+                system = "${system}";
+                config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+                  "terraform"
+                  "code"
+                ];
+              };
+              modules = [
+                {
+                  home.packages = [
+                    nix-search-cli.packages.${system}.default
+                  ];
+                }
+                ./home.nix
               ];
             };
-            modules = [
-              { 
-                home.packages = [
-                  nix-search-cli.packages.x86_64-linux.default
-                ];
-              }
-              ./home.nix 
-            ];
-            };
+          };
         };
-    };
 }

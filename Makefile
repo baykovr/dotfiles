@@ -9,5 +9,5 @@ switch:
 	@nix run . -- switch --flake .
 
 .PHONY: hmsw
-hwsw:
+hmsw:
 	@home-manager switch --flake ~/.config/home-manager && source ~/.zshrc

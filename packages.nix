@@ -8,7 +8,6 @@ let
     pytest
     pynamodb
     beautifulsoup4
-    fuse
     daemonize
   ];
 in with pkgs;
@@ -17,9 +16,7 @@ in with pkgs;
   ack
   broot
   cargo
-  fuse
   gnumake
-  grim
   jq
   k9s
   kubectl
@@ -34,7 +31,6 @@ in with pkgs;
   nodejs
   ripgrep
   rustc
-  slurp
   ssm-session-manager-plugin
   terraform
   terraform-ls
@@ -48,23 +44,14 @@ in with pkgs;
   # 2024 
   eza
   victor-mono
-  rofi
   docker-compose
   poetry
-  xclip
-  slock
   unzip
   nix-derivation
   comma
-  feh
-  redshift
-  scrot
-  bcc
   act
   gh
   trivy
-  gcc-unwrapped
-  fuse3
   tmux
  (python3.withPackages pypkgs)
 ]
