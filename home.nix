@@ -1,20 +1,19 @@
-{pkgs, lib, ...}: {
-    home.username = "ethos";
-    home.homeDirectory = "/home/ethos";
+{pkgs, lib, username, homeDir, isDarwin, ...}: {
+    home.username = username;
+    home.homeDirectory = homeDir;
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;
 
     nixpkgs.config.allowUnfree = true;
 
     fonts.fontconfig.enable = true;
-    home.packages = import ./packages.nix { pkgs = pkgs; };
+    home.packages = import ./packages.nix { inherit pkgs isDarwin; };
 
     programs.alacritty = {
       enable = true;
       settings = {
         font.size = 18;
         shell.program = "${pkgs.zsh}/bin/zsh";
-        #import =  ["~/.config/alacritty/themes/themes/solarized_light.yaml"];
       };
     };
 
@@ -42,7 +41,7 @@
       };
     };
 
-    programs.vscode = {
+    programs.vscode = lib.mkIf (!isDarwin) {
       enable = true;
       package = pkgs.vscode.fhs;
     };
