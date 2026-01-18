@@ -29,9 +29,8 @@
     programs.tmux = {
       enable = true;
       historyLimit = 1000000;
-      prefix = "C-Space";
       extraConfig = ''
-        # Use ~ as prefix
+        # Use ` as prefix
         unbind C-b
         set -g prefix `
         bind ` send-prefix
@@ -42,9 +41,13 @@
         # Orange background, white foreground
         set -g status-style 'bg=colour208 fg=white'
 
-        # ~ t = new window, ~ w = close window
+        # ` t = new window, ` w = close window
         bind t new-window
         bind w kill-window
+
+        # ` | = vertical split, ` - = horizontal split
+        bind | split-window -h
+        bind - split-window -v
       '';
     };
 
