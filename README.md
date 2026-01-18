@@ -1,7 +1,4 @@
-# dotfiles
-This repository holds my dotfiles.
+dotfiles
 
-## Usage
-```
+usage:
     make switch
-```
