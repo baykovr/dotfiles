@@ -26,6 +26,28 @@
         };
       };
 
+    programs.tmux = {
+      enable = true;
+      historyLimit = 1000000;
+      prefix = "C-Space";
+      extraConfig = ''
+        # Use ~ as prefix
+        unbind C-b
+        set -g prefix `
+        bind ` send-prefix
+
+        # Status bar on top
+        set -g status-position top
+
+        # Orange background, white foreground
+        set -g status-style 'bg=colour208 fg=white'
+
+        # ~ t = new window, ~ w = close window
+        bind t new-window
+        bind w kill-window
+      '';
+    };
+
     programs.bat = {
       enable = true;
       config = {
