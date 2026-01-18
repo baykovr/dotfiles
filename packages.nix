@@ -8,7 +8,6 @@ let
     pytest
     pynamodb
     beautifulsoup4
-    fuse
     daemonize
   ];
 
@@ -55,7 +54,6 @@ let
     nixdoc
     nixpkgs-fmt
     nodejs
-    poetry
     ripgrep
     rustc
     ssm-session-manager-plugin
