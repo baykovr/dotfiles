@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, isDarwin ? false }:
 let
   pypkgs = ps: with ps; [
     boto3
@@ -8,66 +8,67 @@ let
     pytest
     pynamodb
     beautifulsoup4
-    fuse
     daemonize
   ];
-in with pkgs;
-[
-  binutils
-  ack
-  broot
-  cargo
-  fuse
-  gnumake
-  grim
-  jq
-  k9s
-  kubectl
-  most
-  nerd-fonts.fira-code
-  nerd-fonts.jetbrains-mono
-  nerd-fonts.hack
-  nix-index
-  nix-output-monitor
-  nix-tree
-  nixd
-  nixdoc
-  nixpkgs-fmt
-  nodejs
-  ripgrep
-  rustc
-  slurp
-  ssm-session-manager-plugin
-  terraform
-  terraform-ls
-  tldr
-  tree
-  virtualenv
-  zip
-  aws-sam-cli
-  awscli2
-  ssm-session-manager-plugin
-  # 2024 
-  victor-mono
-  rofi
-  docker-compose
-  poetry
-  xclip
-  slock
-  unzip
-  nix-derivation
-  comma
-  feh
-  redshift
-  scrot
-  bcc
-  act
-  gh
-  trivy
-  gcc-unwrapped
-  fuse3
-  tmux
-  claude-code
-  uv
- (python3.withPackages pypkgs)
-]
+
+  linuxOnly = with pkgs; [
+    binutils
+    bcc
+    feh
+    fuse
+    fuse3
+    grim
+    redshift
+    rofi
+    scrot
+    slock
+    slurp
+    xclip
+  ];
+
+  common = with pkgs; [
+    ack
+    act
+    aws-sam-cli
+    awscli2
+    broot
+    cargo
+    claude-code
+    comma
+    docker-compose
+    gcc-unwrapped
+    gh
+    gnumake
+    jq
+    k9s
+    kubectl
+    most
+    nerd-fonts.fira-code
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
+    nix-derivation
+    nix-index
+    nix-output-monitor
+    nix-tree
+    nixd
+    nixdoc
+    nixpkgs-fmt
+    nodejs
+    ripgrep
+    rustc
+    ssm-session-manager-plugin
+    terraform
+    terraform-ls
+    tldr
+    tmux
+    tree
+    trivy
+    unzip
+    uv
+    victor-mono
+    virtualenv
+    zip
+    (python3.withPackages pypkgs)
+  ];
+in
+  if isDarwin then common else common ++ linuxOnly
